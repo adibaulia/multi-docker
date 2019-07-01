@@ -20,3 +20,16 @@ after_success:
   - docker push adibaulia/multi-nginx
   - docker push adibaulia/multi-server
   - docker push adibaulia/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: ap-southeast-1
+  app: docker-multicontainer
+  env: DockerMulticontainer-env
+  bucket_name: elasticbeanstalk-ap-southeast-1-412749818556
+  bucket_path: docker-multicontainer
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
